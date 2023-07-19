@@ -1,6 +1,6 @@
 
 import { Add, Duo, ExpandMore, Inbox, LabelImportant, NearMe, Note, Person, Phone, Star } from '@mui/icons-material'
-import { Button, Icon, IconButton } from '@mui/material'
+import { Button, IconButton } from '@mui/material'
 import React from 'react'
 import './SideBar.css'
 import SidebarOptions from './SidebarOptions'
