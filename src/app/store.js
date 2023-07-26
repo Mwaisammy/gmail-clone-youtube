@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import mailSlice from '../features/mailSlice';
-
+import mailReducer, { selectSendMessageIsOpen } from '../features/mailSlice';
 export const store = configureStore({
   reducer: {
-    counter: mailSlice,
+    mail: mailReducer,
   },
 });
+
+
+console.log('sendMessageIsOpen:', selectSendMessageIsOpen); // Add this line

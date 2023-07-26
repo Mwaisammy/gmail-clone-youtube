@@ -4,7 +4,7 @@
     right: 50px;
     background-color:#404040;
     width: 40%;
-    height: 40px;
+    height: 60%;
     max-width: 500px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -27,9 +27,16 @@
 }
 
 .sendMail__send {
-    background-color: #3079ed;
+    background-color: #3079ed !important;
     text-transform: capitalize !important;
     margin: 15px !important;
+}
+
+.sendMail__error {
+  background-color: white;
+  color: red;
+  text-align: right;
+  padding: 2px;  
 }
 
 .sendMail__close {

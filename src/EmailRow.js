@@ -17,7 +17,7 @@ function EmailRow({ id, title, subject, description, time}) {
                 <IconButton/>
                 <IconButton/>
 
-                    <LabelImportant      />
+                    <LabelImportant />
                 <IconButton/>
             </div>
             <h3 className="emailRow__title">
