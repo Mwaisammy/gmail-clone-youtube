@@ -5,25 +5,36 @@ import { ArrowDropDown, ChevronLeft, ChevronRight, Inbox, KeyboardHide, LocalOff
 import Section from './Section'
 import EmailRow from './EmailRow'
 import { db } from './firebase'
+import 'firebase/firestore';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 
 function EmailList() {
 
     const [emails, setEmails] = useState([]);
-
-
+    
     useEffect(() => {
-        db.collections('emails').orderby('timestamp', 'desc')
-        .onSnapshot((snapshot )=> 
-            setEmails(
-                snapshot.docs.map((doc) =>({
-                    id:doc.id,
-                    data: doc.data(),
-                }))
-            )
-            
-            
-            );
-    }, [])
+       return onSnapshot(
+        query(
+
+          collection(db, "emails"),
+          orderBy("timestamp", 'desc'),
+
+        ),
+        (snapshot)=>{
+            setEmails(snapshot.docs.map((doc) => ({
+              id: doc.id,
+              data: doc.data()
+            })))
+
+        },
+        (error) => console.error(error)
+
+        
+       ) 
+    },[db])
+
+    
+      
   return (
     <div className='emailList'>
         <div className="emailList__settings">
@@ -73,16 +84,21 @@ function EmailList() {
 
 
             <div className="emailList__list">
-                { emails.map(({id, data: { to, subject, message,timestamp}}) => {
-                    <EmailRow
-                        id= {id}
-                        key= {id}
-                        title={to}
-                        subjects={subject}
-                        description={message}
-                        time={new Date(timestamp?.seconds * 1000).toUTCString}
-                    />
-                })}
+            {emails.map(({ id, data: { to, subject, message, timestamp } }) => (
+                <EmailRow
+                  id={id}
+                  key={id}
+                  title={to}
+                  subject={subject}
+                  description={message}
+                  time={new Date(timestamp?.seconds * 1000).toUTCString()}
+                />
+              ))}
+
+              {/* {emails?.map(({ id, to, subject, message, timestamp}) => (
+                <EmailRow key={id} id={id} title={to} subject={subject}  description={message} time={new Date(timestamp?.seconds * 1000).toUTCString()}  />
+              ))} */}
+
                 <EmailRow 
                 title= 'Twitch'
                 subject="Hey fello streamer!!!"
@@ -94,7 +110,7 @@ function EmailList() {
                 description="This is a test "
                 time="10pm"/>
 
-
+ 
             </div>
     </div>
   )

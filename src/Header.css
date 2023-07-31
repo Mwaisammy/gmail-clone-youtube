@@ -8,6 +8,9 @@
     display: flex;
     align-items: center;
 }
+.avatar{
+    cursor: pointer;
+}
 .header__left img { 
     object-fit: contain;
     height: 88px;
